@@ -7,7 +7,7 @@ function DownloadFolder($baseURL, $folder, $nestLevel, $localFolder)
 
     #Set up a web connection to camera
     $webClient = New-Object System.Net.WebClient;
-    $x.Credentials = New-Object System.Net.NetworkCredential("$userID","$password");
+    $cred = New-Object System.Net.NetworkCredential("$userID","$password");
     $webClient.Credentials = $cred;
 
     #Download the root content of the SD card
@@ -66,11 +66,11 @@ function DownloadFolder($baseURL, $folder, $nestLevel, $localFolder)
 }
 
 # URL of your Camera
-$myCameraIP = "111.222.333.444";
-# Where do you want the files to be stored
-$myLocalStorage = "D:\MyCameraFootage\";
+$myCameraIP = $args[0];
 #User ID / Password to access your camera
-$userID = "admin";
-$password = "doyouhaveastrongpassword";
-Cls
+$userID = $args[1];
+$password = $args[2];
+# Where do you want the files to be stored
+$myLocalStorage = $args[3]
+
 DownloadFolder "http://$myCameraIP" "/sd/" 0 "$myLocalStorage"
